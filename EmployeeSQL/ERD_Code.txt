@@ -2,40 +2,43 @@
 # To reset the sample schema, replace everything with
 # two dots ('..' - without quotes).
 
-department
+department as d
 -
-dept_no PK int
-dept_name pk varchar(225)
+dept_no PK VARCHAR(50)
+dept_name varchar(50)
 
+#Composite Key(dept_no & emp_no)
 dept_emp as de
 -
-dept_no int PK FK >- department.dept_no
-emp_no PK int
+dept_no PK VARCHAR(50) FK >- d.dept_no
+emp_no PK  BIGINT FK - e.emp_no
 
 
 dept_manager as dm
 ----
-dept_no   pK int FK
-emp_no  PK int 
+manager_id INT PK
+dept_no VARCHAR(50) FK >- d.dept_no
+emp_no BIGINT FK - e.emp_no
 
 
-# Table documentation comment 1 (try the PDF/RTF export)
-employees as e # Table documentation comment 2
+employees as e
 ------------
-emp_no PK FK -< de.emp_no int
-emp_title_id PK varchar(225)
-birth_date date
-first_name varchar(225)
-last_name varchar(225)
-sex varchar(225)
-hire_date date
+emp_no PK 
+emp_title_id VARCHAR(50) FK >- t.title_id 
+birth_date DATE
+first_name VARCHAR(50)
+last_name VARCHAR(50)
+sex VARCHAR(50)
+hire_date DATE
 
+#Composite Key(emp_no & salary)
 salaries as s
 ----
-emp_no  PK FK - e.emp_no
-salary PK money
+emp_no BIGINT  PK FK - e.emp_no
+salary PK MONEY PK
 
-titles
+titles as t
 ------
-title_id PK varchar(225) FK - e.emp_title_id
-title PK varchar(225)
+title_id PK VARCHAR(50)
+title  vARCHAR(50)
+
