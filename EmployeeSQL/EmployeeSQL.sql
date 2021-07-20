@@ -49,3 +49,25 @@ ON J.emp_no = E.emp_no
 --5) first_name , last_name , sex for employees whose first name is Hercules and last name starts with B
 -- Tables needed are employees
 
+SELECT first_name , last_name , sex
+FROM employees
+WHERE first_name = 'Hercules' AND last_name LIKE 'B%'
+
+--6) All employees in the sales department emp_no , last_name , first_name , dept_name
+-- Tables needed are department > dept_emp > employees
+
+--Cosntructing the employees > department/dept_emp query
+
+SELECT J.emp_no , E.last_name , E.first_name , J.dept_name
+FROM employees AS E
+JOIN(
+--Constructing dpeartment/dept_emp subquery
+
+SELECT DE.emp_no , D.dept_name
+FROM department AS D
+JOIN dept_emp AS DE
+ON D.dept_no = DE.dept_no
+WHERE D.dept_no = 'd007'
+	) AS J
+ON E.emp_no = J.emp_no
+
