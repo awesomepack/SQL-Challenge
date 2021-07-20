@@ -71,3 +71,32 @@ WHERE D.dept_no = 'd007'
 	) AS J
 ON E.emp_no = J.emp_no
 
+--7) All employees from sales and developement departments emp_no , last_name , first_name , dept_name
+-- Tables needed department > dept_emp > employees
+
+--Cosntructing the employees > department/dept_emp query
+
+SELECT J.emp_no , E.last_name , E.first_name , J.dept_name
+FROM employees AS E
+JOIN(
+--Constructing dpeartment/dept_emp subquery
+
+SELECT DE.emp_no , D.dept_name
+FROM department AS D
+JOIN dept_emp AS DE
+ON D.dept_no = DE.dept_no
+WHERE D.dept_no = 'd007' OR D.dept_no = 'd005'
+	) AS J
+ON E.emp_no = J.emp_no
+
+--Looking for employees who work in both the development and sales departments yielded no results using "AND" operator
+-- Instead looked for employees who worked in either or
+
+--8) In Descending order list the count of each unique last name in the dataset
+-- Tables needed are employees
+
+SELECT emp_no , first_name , last_name , count(DISTINCT last_name) AS last_name_count
+FROM employees
+-- Consider using group by function to get last name count
+
+
