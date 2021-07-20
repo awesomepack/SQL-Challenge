@@ -26,12 +26,26 @@ JOIN (
 SELECT DM.dept_no , D.dept_name , DM.emp_no
 FROM dept_manager AS DM
 JOIN department AS D ON DM.dept_no = D.dept_no
-	) 
-AS J ON E.emp_no = J.emp_no
+	) AS J
+ON E.emp_no = J.emp_no
 
 --4) for each employee: emp_no , last_name , first_name , dept_name
 -- Tables needed are dept_emp > department > employees
 
---Constructing the 
+--Constructing the employees > dept_emp/department query
 
+SELECT J.emp_no , E.last_name , E.first_name , J.dept_name
+FROM employees AS E
+JOIN(
+--Constructing the dept_emp/department query
+
+SELECT DE.emp_no , D.dept_name
+FROM dept_emp AS DE
+JOIN department AS D
+ON DE.dept_no = D.dept_no
+	) AS J
+ON J.emp_no = E.emp_no
+
+--5) first_name , last_name , sex for employees whose first name is Hercules and last name starts with B
+-- Tables needed are employees
 
