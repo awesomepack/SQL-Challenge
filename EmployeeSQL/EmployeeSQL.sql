@@ -95,8 +95,10 @@ ON E.emp_no = J.emp_no
 --8) In Descending order list the count of each unique last name in the dataset
 -- Tables needed are employees
 
-SELECT emp_no , first_name , last_name , count(DISTINCT last_name) AS last_name_count
+SELECT  COUNT(emp_no) AS last_name_count
 FROM employees
--- Consider using group by function to get last name count
+GROUP BY last_name
+ORDER BY last_name_count DESC
+
 
 
